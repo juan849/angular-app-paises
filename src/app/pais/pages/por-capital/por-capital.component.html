@@ -1,0 +1,17 @@
+<h2>Por Capital </h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-pais-buscador (eventoTermino)="obtenerPaisesPorCapital($event)" [placeholderBusqueda]="placeholderCapital" (eventoDebounce)="sugerenciasCapital($event)"></app-pais-buscador>
+    </div>
+    <hr>
+    <div class="alert alert-danger" *ngIf="hayError">
+        No se encontró nada con el término {{terminoCapital}}
+    </div>
+
+    <div class="row" *ngIf="arrayPaisesCapital.length > 0">
+        <div class="col">
+            <app-pais-tabla [paises]="arrayPaisesCapital"></app-pais-tabla>
+        </div>
+    </div>
+</div>

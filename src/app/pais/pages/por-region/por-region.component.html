@@ -1,0 +1,13 @@
+<h2>Por Región</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-pais-buscador (eventoTermino)="obtenerPaisesPorRegion($event)" [placeholderBusqueda]="placeholderRegion"></app-pais-buscador>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <app-pais-tabla [paises]="obtenerArrayPaisesPorRegion"></app-pais-tabla>
+    </div>
+</div>
