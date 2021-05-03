@@ -5,11 +5,11 @@
         <app-pais-buscador (eventoTermino)="obtenerPaisesPorCapital($event)" [placeholderBusqueda]="placeholderCapital" (eventoDebounce)="sugerenciasCapital($event)"></app-pais-buscador>
     </div>
     <hr>
-    <div class="alert alert-danger" *ngIf="hayError">
+    <div class="alert alert-danger animate__animated animate__bounceInRight" *ngIf="hayError">
         No se encontró nada con el término {{terminoCapital}}
     </div>
 
-    <div class="row" *ngIf="arrayPaisesCapital.length > 0">
+    <div class="row animate__animated animate__bounceInRight" *ngIf="arrayPaisesCapital.length > 0">
         <div class="col">
             <app-pais-tabla [paises]="arrayPaisesCapital"></app-pais-tabla>
         </div>

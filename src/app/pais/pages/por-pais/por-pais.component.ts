@@ -6,6 +6,9 @@ import { debounceTime } from 'rxjs/operators';
   selector: 'app-por-pais',
   templateUrl: './por-pais.component.html',
   styles: [
+    `li{
+      cursor: pointer;
+    }`
   ]
 })
 export class PorPaisComponent implements OnInit {
@@ -13,12 +16,16 @@ export class PorPaisComponent implements OnInit {
   termino: string;
   hayError: boolean;
   arrayPaises: Country[];
+  arrayPaisesSugerencias: Country[];
   placeholderPais: string;
+  mostrarSugerencias: boolean;
   constructor(private paisService: PaisService) {
     this.termino = '';
     this.hayError = false;
     this.arrayPaises = [];
+    this.arrayPaisesSugerencias = [];
     this.placeholderPais = "Buscar País ...";
+    this.mostrarSugerencias = false;
    }
 
   ngOnInit(): void {
@@ -39,8 +46,28 @@ export class PorPaisComponent implements OnInit {
       });
   }
 
+  /**
+   * Llenamos la lista de sugerencias
+   * @param termino : lo que escribe el usuario
+   */
   sugerencias(termino: string){
-    this.hayError = false
+    this.hayError = false;
+    this.termino = termino;
+    this.mostrarSugerencias = true;
     console.log('termino :>> ', termino);
+    this.paisService.buscarPorNombre(termino)
+    .subscribe(paises => {
+      this.arrayPaisesSugerencias = paises.splice(0,5)
+    }, (error) => this.arrayPaisesSugerencias = [])
+  }
+
+  /**
+   * Sirve para ocultar y mostrar la lista de sugerencias
+   * @param termino lo que escribe el usuario
+   */
+  buscarSugerido(termino: string){
+    this.mostrarSugerencias = false;
+    this.buscar(termino);
+    
   }
 }
